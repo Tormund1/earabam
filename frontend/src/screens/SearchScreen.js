@@ -1,8 +1,8 @@
 import React, { useEffect, useReducer, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { getError } from '../utils';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { getError } from '../utils';
 import { Helmet } from 'react-helmet-async';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -10,8 +10,8 @@ import Rating from '../components/Rating';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Button from 'react-bootstrap/Button';
-import { LinkContainer } from 'react-router-bootstrap';
 import Product from '../components/Product';
+import LinkContainer from 'react-router-bootstrap/LinkContainer';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -28,6 +28,7 @@ const reducer = (state, action) => {
       };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
+
     default:
       return state;
   }
@@ -47,28 +48,33 @@ const prices = [
     value: '201-1000',
   },
 ];
+
 export const ratings = [
   {
     name: '4stars & up',
     rating: 4,
   },
+
   {
     name: '3stars & up',
     rating: 3,
   },
+
   {
     name: '2stars & up',
     rating: 2,
   },
+
   {
     name: '1stars & up',
     rating: 1,
   },
 ];
+
 export default function SearchScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
-  const sp = new URLSearchParams(search);
+  const sp = new URLSearchParams(search); // /search?category=Shirts
   const category = sp.get('category') || 'all';
   const query = sp.get('query') || 'all';
   const price = sp.get('price') || 'all';
@@ -81,6 +87,7 @@ export default function SearchScreen() {
       loading: true,
       error: '',
     });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -110,6 +117,7 @@ export default function SearchScreen() {
     };
     fetchCategories();
   }, [dispatch]);
+
   const getFilterUrl = (filter) => {
     const filterPage = filter.page || page;
     const filterCategory = filter.category || category;
@@ -119,15 +127,14 @@ export default function SearchScreen() {
     const sortOrder = filter.order || order;
     return `/search?category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
-
   return (
     <div>
       <Helmet>
-        <title>Ürünleri Ara</title>
+        <title>Search Products</title>
       </Helmet>
       <Row>
         <Col md={3}>
-          <h3>Departmant</h3>
+          <h3>Department</h3>
           <div>
             <ul>
               <li>
@@ -151,14 +158,14 @@ export default function SearchScreen() {
             </ul>
           </div>
           <div>
-            <h3>Fiyat</h3>
+            <h3>Price</h3>
             <ul>
               <li>
                 <Link
                   className={'all' === price ? 'text-bold' : ''}
                   to={getFilterUrl({ price: 'all' })}
                 >
-                  any
+                  Any
                 </Link>
               </li>
               {prices.map((p) => (
@@ -174,15 +181,15 @@ export default function SearchScreen() {
             </ul>
           </div>
           <div>
-            <h3>Ort. Müşteri Yorumu</h3>
+            <h3>Avg. Customer Review</h3>
             <ul>
-              {rating.map((r) => (
+              {ratings.map((r) => (
                 <li key={r.name}>
                   <Link
                     to={getFilterUrl({ rating: r.rating })}
                     className={`${r.rating}` === `${rating}` ? 'text-bold' : ''}
                   >
-                    <Rating caption={'& up'} rating={r.rating}></Rating>
+                    <Rating caption={' & up'} rating={r.rating}></Rating>
                   </Link>
                 </li>
               ))}
@@ -191,7 +198,7 @@ export default function SearchScreen() {
                   to={getFilterUrl({ rating: 'all' })}
                   className={rating === 'all' ? 'text-bold' : ''}
                 >
-                  <Rating caption={' &up'} rating={0}></Rating>
+                  <Rating caption={' & up'} rating={0}></Rating>
                 </Link>
               </li>
             </ul>
