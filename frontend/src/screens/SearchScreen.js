@@ -47,6 +47,14 @@ const prices = [
     name: '$201 to $1000',
     value: '201-1000',
   },
+  {
+    name: '$1001 to $10000',
+    value: '1001-10000',
+  },
+  {
+    name: '$10001 to $100000',
+    value: '10001-100000',
+  },
 ];
 
 export const ratings = [
@@ -134,7 +142,7 @@ export default function SearchScreen() {
       </Helmet>
       <Row>
         <Col md={3}>
-          <h3>Department</h3>
+          <h3>Kategoriler</h3>
           <div>
             <ul>
               <li>
@@ -142,7 +150,7 @@ export default function SearchScreen() {
                   className={'all' === category ? 'text-bold' : ''}
                   to={getFilterUrl({ category: 'all' })}
                 >
-                  Any
+                  Hepsi
                 </Link>
               </li>
               {categories.map((c) => (
@@ -158,14 +166,14 @@ export default function SearchScreen() {
             </ul>
           </div>
           <div>
-            <h3>Price</h3>
+            <h3>Fiyat</h3>
             <ul>
               <li>
                 <Link
                   className={'all' === price ? 'text-bold' : ''}
                   to={getFilterUrl({ price: 'all' })}
                 >
-                  Any
+                  Hepsi
                 </Link>
               </li>
               {prices.map((p) => (
@@ -181,7 +189,7 @@ export default function SearchScreen() {
             </ul>
           </div>
           <div>
-            <h3>Avg. Customer Review</h3>
+            <h3>Ort. Müşteri Yorumu</h3>
             <ul>
               {ratings.map((r) => (
                 <li key={r.name}>
@@ -214,7 +222,7 @@ export default function SearchScreen() {
               <Row className="justify-content-between mb-3">
                 <Col md={6}>
                   <div>
-                    {countProducts === 0 ? 'No' : countProducts} Results
+                    {countProducts === 0 ? 'No' : countProducts} Sonuçlar
                     {query !== 'all' && ' : ' + query}
                     {category !== 'all' && ' : ' + category}
                     {price !== 'all' && ' : Price ' + price}
@@ -233,7 +241,7 @@ export default function SearchScreen() {
                   </div>
                 </Col>
                 <Col className="text-end">
-                  Sort by{''}
+                  Sırala: {''}
                   <select
                     value={order}
                     onChange={(e) => {
