@@ -62,7 +62,7 @@ main {
   height: 100%;
   position: absolute;
   left: -300px;
-  background-color: #100901;
+  background-color: #000000;
   transition: 0.5s;
 }
 
