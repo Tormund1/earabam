@@ -88,10 +88,10 @@ export default function DashboardScreen() {
               <Card>
                 <Card.Body>
                   <Card.Title>
-                    $
                     {summary.orders && summary.users[0]
                       ? summary.orders[0].totalSales.toFixed(2)
                       : 0}
+                    ₺
                   </Card.Title>
                   <Card.Text> Siparişler</Card.Text>
                 </Card.Body>
@@ -109,7 +109,7 @@ export default function DashboardScreen() {
                 chartType="AreaChart"
                 loader={<div>Loading Chart...</div>}
                 data={[
-                  ['Date', 'Sales'],
+                  ['Date', 'Satışlar'],
                   ...summary.dailyOrders.map((x) => [x._id, x.sales]),
                 ]}
               ></Chart>

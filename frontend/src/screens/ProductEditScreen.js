@@ -35,6 +35,7 @@ const reducer = (state, action) => {
       };
     case 'UPLOAD_FAIL':
       return { ...state, loadingUpload: false, errorUpload: action.payload };
+
     default:
       return state;
   }

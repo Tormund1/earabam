@@ -36,23 +36,23 @@ const reducer = (state, action) => {
 
 const prices = [
   {
-    name: '$1 to $50',
+    name: '1₺ to 50₺',
     value: '1-50',
   },
   {
-    name: '$51 to $200',
+    name: '51₺ to 200₺',
     value: '51-200',
   },
   {
-    name: '$201 to $1000',
+    name: '201₺ to 1000₺',
     value: '201-1000',
   },
   {
-    name: '$1001 to $10000',
+    name: '1001₺ to 10000₺',
     value: '1001-10000',
   },
   {
-    name: '$10001 to $100000',
+    name: '10001₺ to $100000₺',
     value: '10001-100000',
   },
 ];
@@ -138,7 +138,7 @@ export default function SearchScreen() {
   return (
     <div>
       <Helmet>
-        <title>Search Products</title>
+        <title>Ürünleri ara</title>
       </Helmet>
       <Row>
         <Col md={3}>
@@ -197,7 +197,7 @@ export default function SearchScreen() {
                     to={getFilterUrl({ rating: r.rating })}
                     className={`${r.rating}` === `${rating}` ? 'text-bold' : ''}
                   >
-                    <Rating caption={' & up'} rating={r.rating}></Rating>
+                    <Rating caption={' & üstü'} rating={r.rating}></Rating>
                   </Link>
                 </li>
               ))}
@@ -206,7 +206,7 @@ export default function SearchScreen() {
                   to={getFilterUrl({ rating: 'all' })}
                   className={rating === 'all' ? 'text-bold' : ''}
                 >
-                  <Rating caption={' & up'} rating={0}></Rating>
+                  <Rating caption={' & üstü'} rating={0}></Rating>
                 </Link>
               </li>
             </ul>
