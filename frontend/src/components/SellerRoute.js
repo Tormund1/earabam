@@ -1,20 +1,9 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Redirect, Route } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
+import { Store } from '../Store';
 
-export default function SellerRoute({ component: Component, ...rest }) {
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        userInfo && userInfo.isSeller ? (
-          <Component {...props}></Component>
-        ) : (
-          <Redirect to="/signin" />
-        )
-      }
-    ></Route>
-  );
+export default function SellerRoute({ children }) {
+  const { state } = useContext(Store);
+  const { userInfo } = state;
+  return userInfo && userInfo.isSeller ? children : <Navigate to="/signin" />;
 }

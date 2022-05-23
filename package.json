@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/Tormund1/EArabam/issues"
   },
-  "homepage": "https://github.com/Tormund1/EArabam#readme"
+  "homepage": "https://github.com/Tormund1/EArabam#readme",
+  "dependencies": {
+    "react-redux": "^8.0.2",
+    "redirect": "^0.2.0"
+  }
 }
