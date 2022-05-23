@@ -32,6 +32,8 @@ import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
+import SellerRoute from './components/SellerRoute';
+import OrderListScreen from './screens/OrderListScreen';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -112,6 +114,16 @@ function App() {
                     <Link className="nav-link" to="/signin">
                       Giriş Yap
                     </Link>
+                  )}
+                  {userInfo && userInfo.isSeller && (
+                    <NavDropdown title="Satıcı" id="admin-nav-dropdown">
+                      <LinkContainer to="/productlist/seller">
+                        <NavDropdown.Item>Ürünler</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/orderlist/seller">
+                        <NavDropdown.Item>Siparişler</NavDropdown.Item>
+                      </LinkContainer>
+                    </NavDropdown>
                   )}
                   {userInfo && userInfo.isAdmin && (
                     <NavDropdown title="Admin" id="admin-nav-dropdown">
@@ -205,6 +217,14 @@ function App() {
                 }
               ></Route>
               <Route
+                path="/admin/orders"
+                element={
+                  <AdminRoute>
+                    <OrderListScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
                 path="/admin/products"
                 element={
                   <AdminRoute>
@@ -236,6 +256,14 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
+              <SellerRoute
+                path="/productlist/seller"
+                component={ProductListScreen}
+              ></SellerRoute>
+              <SellerRoute
+                path="/orderlist/seller"
+                component={OrderListScreen}
+              ></SellerRoute>
 
               <Route path="/" element={<HomeScreen />} />
             </Routes>
