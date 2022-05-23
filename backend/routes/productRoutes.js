@@ -12,8 +12,8 @@ productRouter.get('/', async (req, res) => {
 productRouter.post(
   '/',
   isAuth,
-  isAdmin,
   isSeller,
+
   expressAsyncHandler(async (req, res) => {
     const newProduct = new Product({
       name: 'sample name ' + Date.now(),
@@ -34,7 +34,6 @@ productRouter.post(
 productRouter.put(
   '/:id',
   isAuth,
-  isAdmin,
   isSeller,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
@@ -59,7 +58,6 @@ productRouter.delete(
   '/:id',
   isAuth,
   isAdmin,
-  isSeller,
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
@@ -127,7 +125,6 @@ productRouter.get(
     });
   })
 );
-
 productRouter.get(
   '/seller',
   isAuth,
