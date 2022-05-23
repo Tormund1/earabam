@@ -1,7 +1,7 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
-import { isAuth, isAdmin } from '../utils.js';
+import { isAuth, isAdmin, isSeller } from '../utils.js';
 
 const productRouter = express.Router();
 
@@ -13,6 +13,7 @@ productRouter.post(
   '/',
   isAuth,
   isAdmin,
+  isSeller,
   expressAsyncHandler(async (req, res) => {
     const newProduct = new Product({
       name: 'sample name ' + Date.now(),
@@ -34,6 +35,7 @@ productRouter.put(
   '/:id',
   isAuth,
   isAdmin,
+  isSeller,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
@@ -57,6 +59,7 @@ productRouter.delete(
   '/:id',
   isAuth,
   isAdmin,
+  isSeller,
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
@@ -107,6 +110,28 @@ productRouter.get(
   '/admin',
   isAuth,
   isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const { query } = req;
+    const page = query.page || 1;
+    const pageSize = query.pageSize || PAGE_SIZE;
+
+    const products = await Product.find()
+      .skip(pageSize * (page - 1))
+      .limit(pageSize);
+    const countProducts = await Product.countDocuments();
+    res.send({
+      products,
+      countProducts,
+      page,
+      pages: Math.ceil(countProducts / pageSize),
+    });
+  })
+);
+
+productRouter.get(
+  '/seller',
+  isAuth,
+  isSeller,
   expressAsyncHandler(async (req, res) => {
     const { query } = req;
     const page = query.page || 1;

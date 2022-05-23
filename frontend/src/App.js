@@ -32,6 +32,8 @@ import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
+import ProductListScreen1 from './screens/ProductListScreen1';
+import ProductEditScreen1 from './screens/ProductEditScreen1';
 
 import OrderListScreen from './screens/OrderListScreen';
 import SellerRoute from './components/SellerRoute';
@@ -117,7 +119,7 @@ function App() {
                     </Link>
                   )}
                   {userInfo && userInfo.isSeller && (
-                    <NavDropdown title="Seller" id="seller-nav-dropdown">
+                    <NavDropdown title="Ürünler" id="seller-nav-dropdown">
                       <LinkContainer to="/seller/products">
                         <NavDropdown.Item>Ürünler</NavDropdown.Item>
                       </LinkContainer>
@@ -210,10 +212,11 @@ function App() {
                 path="/seller/products"
                 element={
                   <SellerRoute>
-                    <DashboardScreen />
+                    <ProductListScreen1 />
                   </SellerRoute>
                 }
               ></Route>
+
               {/* Admin Routes */}
               <Route
                 path="/admin/dashboard"
@@ -253,6 +256,14 @@ function App() {
                   <AdminRoute>
                     <ProductEditScreen />
                   </AdminRoute>
+                }
+              ></Route>
+              <Route
+                path="/seller/product/:id"
+                element={
+                  <SellerRoute>
+                    <ProductEditScreen1 />
+                  </SellerRoute>
                 }
               ></Route>
               <Route
