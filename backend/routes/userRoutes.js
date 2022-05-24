@@ -40,9 +40,9 @@ userRouter.put(
       user.isAdmin = Boolean(req.body.isAdmin);
       user.isSeller = Boolean(req.body.isSeller);
       const updatedUser = await user.save();
-      res.send({ message: 'User Updated', user: updatedUser });
+      res.send({ message: 'Kullanıcı güncellendi', user: updatedUser });
     } else {
-      res.status(404).send({ message: 'User Not Found' });
+      res.status(404).send({ message: 'Kullanıcı bulunamadı!' });
     }
   })
 );

@@ -21,7 +21,7 @@ orderRouter.post(
       user: req.user._id,
     });
     const order = await newOrder.save();
-    res.status(201).send({ message: 'New Order Created', order });
+    res.status(201).send({ message: 'Yeni sipariş oluşturuldu', order });
   })
 );
 
@@ -84,7 +84,7 @@ orderRouter.get(
     if (order) {
       res.send(order);
     } else {
-      res.status(404).send({ message: 'Order Not Found' });
+      res.status(404).send({ message: 'Sipariş bulunamadı!' });
     }
   })
 );

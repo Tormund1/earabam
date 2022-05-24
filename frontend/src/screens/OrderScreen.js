@@ -121,7 +121,7 @@ export default function OrderScreen() {
                       <Col md={3}>
                         <span>{item.quantity}</span>
                       </Col>
-                      <Col md={3}>${item.price}</Col>
+                      <Col md={3}>{item.price}₺</Col>
                     </Row>
                   </ListGroup.Item>
                 ))}
@@ -137,19 +137,19 @@ export default function OrderScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Ürünler</Col>
-                    <Col>${order.itemsPrice.toFixed(2)}</Col>
+                    <Col>{order.itemsPrice.toFixed(2)}₺</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Teslimat Ücreti</Col>
-                    <Col>${order.shippingPrice.toFixed(2)}</Col>
+                    <Col>{order.shippingPrice.toFixed(2)}₺</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Vergi</Col>
-                    <Col>${order.taxPrice.toFixed(2)}</Col>
+                    <Col>{order.taxPrice.toFixed(2)}₺</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -158,7 +158,7 @@ export default function OrderScreen() {
                       <strong> Siparis Toplamı</strong>
                     </Col>
                     <Col>
-                      <strong>${order.totalPrice.toFixed(2)}</strong>
+                      <strong>{order.totalPrice.toFixed(2)}₺</strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>

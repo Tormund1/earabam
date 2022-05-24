@@ -16,19 +16,19 @@ productRouter.post(
 
   expressAsyncHandler(async (req, res) => {
     const newProduct = new Product({
-      name: 'sample name ' + Date.now(),
-      slug: 'sample-name-' + Date.now(),
+      name: 'örnek isim ' + Date.now(),
+      slug: 'ornek-isim-' + Date.now(),
       image: '/images/tampon.jpg',
       price: 0,
-      category: 'sample category',
-      brand: 'sample brand',
+      category: 'örnek kategori',
+      brand: 'örnek marka',
       countInStock: 0,
       rating: 0,
       numReviews: 0,
-      description: 'sample description',
+      description: 'örnek açıklama',
     });
     const product = await newProduct.save();
-    res.send({ message: 'Product Created', product });
+    res.send({ message: 'Ürün Oluşturuldu.', product });
   })
 );
 productRouter.put(
@@ -48,9 +48,9 @@ productRouter.put(
       product.countInStock = req.body.countInStock;
       product.description = req.body.description;
       await product.save();
-      res.send({ message: 'Product Updated' });
+      res.send({ message: 'Ürün başarıyla güncellendi' });
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).send({ message: 'Ürün bulunamadı' });
     }
   })
 );
@@ -62,9 +62,9 @@ productRouter.delete(
     const product = await Product.findById(req.params.id);
     if (product) {
       await product.remove();
-      res.send({ message: 'Product Deleted' });
+      res.send({ message: 'Ürün Silindi.' });
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).send({ message: 'Ürün bulunamadı.' });
     }
   })
 );
@@ -237,7 +237,7 @@ productRouter.get('/slug/:slug', async (req, res) => {
   if (product) {
     res.send(product);
   } else {
-    res.status(404).send({ message: 'Product not found' });
+    res.status(404).send({ message: 'Ürün bulunamadı' });
   }
 });
 productRouter.get('/:id', async (req, res) => {
@@ -245,7 +245,7 @@ productRouter.get('/:id', async (req, res) => {
   if (product) {
     res.send(product);
   } else {
-    res.status(404).send({ message: 'Product not found' });
+    res.status(404).send({ message: 'Ürün bulunamadı' });
   }
 });
 
